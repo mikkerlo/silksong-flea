@@ -46,7 +46,7 @@ function extractFleaFields(jsonData) {
         return TARGET_FLEA_FIELDS.map(field => ({
             key: field,
             value: playerData.hasOwnProperty(field) 
-                ? (playerData[field] ? 'true' : 'false')
+                ? (playerData[field] ? '✓' : '✗')
                 : 'n/a'
         }))
     } catch (err) {
@@ -55,31 +55,6 @@ function extractFleaFields(jsonData) {
     }
 }
 
-// Function to update playerData based on table changes
-function updateFleaFields(fieldsData, originalJsonData) {
-    try {
-        const data = typeof originalJsonData === 'string' ? JSON.parse(originalJsonData) : originalJsonData
-        
-        fieldsData.forEach(fieldData => {
-            const { key, value } = fieldData
-            if (TARGET_FLEA_FIELDS.includes(key)) {
-                if (value.toLowerCase() === 'true') {
-                    data.playerData[key] = true
-                } else if (value.toLowerCase() === 'false') {
-                    data.playerData[key] = false
-                } else if (value.toLowerCase() === 'n/a') {
-                    // Remove field if set to n/a
-                    delete data.playerData[key]
-                }
-            }
-        })
-        
-        return JSON.stringify(data, undefined, 2)
-    } catch (err) {
-        console.error('Error updating flea fields:', err)
-        return originalJsonData
-    }
-}
 
 class App extends React.Component {
     constructor(){
@@ -92,7 +67,6 @@ class App extends React.Component {
     state = {
         fleaFields: [], // Array of {key, value} objects for table display
         gameFileComplete: "", // Store the complete JSON data
-        gameFileCompleteOriginal: "", // Store the original complete JSON data
         editing: false,
         dragging: false,
         switchMode: false 
@@ -132,24 +106,7 @@ class App extends React.Component {
 			this.fileInputRef.current.value = null
 		})
     }
-    handleFieldChange = (index, newValue) => {
-        const updatedFields = this.state.fleaFields.slice()
-        updatedFields[index] = Object.assign({}, updatedFields[index], { value: newValue })
-        
-        // Update state with new field values
-        this.setState({ fleaFields: updatedFields })
-        
-        // Update the complete JSON with the changes
-        const updatedCompleteJson = updateFleaFields(updatedFields, this.state.gameFileComplete)
-        this.setState({ gameFileComplete: updatedCompleteJson })
-    }
-    handleReset = e => {
-        const originalFields = extractFleaFields(this.state.gameFileCompleteOriginal)
-        this.setState({
-            fleaFields: originalFields,
-            gameFileComplete: this.state.gameFileCompleteOriginal
-        }) 
-    }
+
     setGameFile = (jsonString, name) => {
         const completeJson = JSON.stringify(JSON.parse(jsonString), undefined, 2)
         const fleaFields = extractFleaFields(jsonString)
@@ -157,7 +114,6 @@ class App extends React.Component {
         this.setState({
             fleaFields: fleaFields,
             gameFileComplete: completeJson,
-            gameFileCompleteOriginal: completeJson,
             gameFileName: name, 
             editing: true 
         })
@@ -165,12 +121,12 @@ class App extends React.Component {
     render(){
         return <div id="wrapper">
             {this.state.dragging && <div id="cover"></div>}
-            <p id="description">This online tool allows you to view and modify SavedFlea fields in a Hollow Knight save file.</p>
+            <p id="description">This online tool allows you to view SavedFlea fields in a Hollow Knight save file.</p>
             <p id="source">You can view the source code in the <a href="https://github.com/bloodorca/hollow">github repo</a>.</p>
 			<ul id="instructions">
                 <li>Make a backup of your original file.</li>
-                <li>Select or drag in the source save file you want to modify.</li>
-                <li>Modify the SavedFlea values in the table below.</li>
+                <li>Select or drag in the source save file you want to view.</li>
+                <li>View the SavedFlea values in the table below.</li>
             </ul>
 			<div>
                 <button id="file-button" onClick={this.handleFileClick}>Select File</button>
@@ -196,23 +152,13 @@ class App extends React.Component {
                                 {this.state.fleaFields.map((field, index) => (
                                     <tr key={field.key}>
                                         <td>{field.key}</td>
-                                        <td>
-                                            <select 
-                                                value={field.value} 
-                                                onChange={(e) => this.handleFieldChange(index, e.target.value)}
-                                            >
-                                                <option value="true">true</option>
-                                                <option value="false">false</option>
-                                                <option value="n/a">n/a</option>
-                                            </select>
+                                        <td style={{textAlign: 'center', fontSize: '1.2em'}}>
+                                            {field.value}
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    </div>
-                    <div id="editor-buttons">
-                        <button onClick={this.handleReset}>reset</button>
                     </div>
                 </div>
             )}

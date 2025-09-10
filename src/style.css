@@ -147,21 +147,6 @@ body {
   background-color: #f0f0f0;
 }
 
-#flea-table select {
-  font-family: inherit;
-  font-size: inherit;
-  padding: 2px 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  background-color: white;
-  min-width: 70px;
-}
-
-#flea-table select:focus {
-  border-color: royalblue;
-  outline: none;
-}
-
 #cover {
   background-color: rgba(0, 0, 0, 0.219); 
   position: fixed;
