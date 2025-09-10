@@ -8,6 +8,90 @@ import "./style.css"
 var history = new History()
 var windowDrag = new WindowDrag()
 
+// List of specific SavedFlea fields to display
+const TARGET_FLEA_FIELDS = [
+    'SavedFlea_Bone_06',
+    'SavedFlea_Dock_16',
+    'SavedFlea_Bone_East_05',
+    'SavedFlea_Bone_East_17b',
+    'SavedFlea_Ant_03',
+    'SavedFlea_Greymoor_15b',
+    'SavedFlea_Greymoor_06',
+    'SavedFlea_Shellwood_03',
+    'SavedFlea_Bone_East_10_Church',
+    'SavedFlea_Coral_35',
+    'SavedFlea_Dust_12',
+    'SavedFlea_Dust_09',
+    'SavedFlea_Belltown_04',
+    'SavedFlea_Crawl_06',
+    'SavedFlea_Slab_Cell',
+    'SavedFlea_Shadow_28',
+    'SavedFlea_Dock_03d',
+    'SavedFlea_Under_23',
+    'SavedFlea_Shadow_10',
+    'SavedFlea_Song_14',
+    'SavedFlea_Coral_24',
+    'SavedFlea_Peak_05c',
+    'SavedFlea_Library_09',
+    'SavedFlea_Song_11',
+    'SavedFlea_Library_01',
+    'SavedFlea_Under_21',
+    'SavedFlea_Slab_06'
+]
+
+// Function to extract and format target fields from playerData
+function formatFleaFields(jsonData) {
+    try {
+        const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData
+        const playerData = data.playerData || {}
+        
+        let formatted = "=== SavedFlea Fields Status ===\n\n"
+        
+        TARGET_FLEA_FIELDS.forEach(field => {
+            let status = 'n/a'
+            if (playerData.hasOwnProperty(field)) {
+                status = playerData[field] ? 'true' : 'false'
+            }
+            formatted += `${field}: ${status}\n`
+        })
+        
+        return formatted
+    } catch (err) {
+        console.error('Error formatting flea fields:', err)
+        return "Error: Could not parse save file data"
+    }
+}
+
+// Function to parse formatted flea fields back to playerData updates
+function parseFleaFields(formattedText, originalJsonData) {
+    try {
+        const data = typeof originalJsonData === 'string' ? JSON.parse(originalJsonData) : originalJsonData
+        const lines = formattedText.split('\n')
+        
+        lines.forEach(line => {
+            const match = line.match(/^(SavedFlea_[^:]+):\s*(true|false|n\/a)$/i)
+            if (match) {
+                const [, fieldName, value] = match
+                if (TARGET_FLEA_FIELDS.includes(fieldName)) {
+                    if (value.toLowerCase() === 'true') {
+                        data.playerData[fieldName] = true
+                    } else if (value.toLowerCase() === 'false') {
+                        data.playerData[fieldName] = false
+                    } else if (value.toLowerCase() === 'n/a') {
+                        // Remove field if set to n/a
+                        delete data.playerData[fieldName]
+                    }
+                }
+            }
+        })
+        
+        return JSON.stringify(data, undefined, 2)
+    } catch (err) {
+        console.error('Error parsing flea fields:', err)
+        return originalJsonData
+    }
+}
+
 class App extends React.Component {
     constructor(){
         super()
@@ -19,6 +103,8 @@ class App extends React.Component {
     state = {
         gameFile: "", 
         gameFileOriginal: "",
+        gameFileComplete: "", // Store the complete JSON data
+        gameFileCompleteOriginal: "", // Store the original complete JSON data
         editing: false,
         dragging: false,
         switchMode: false 
@@ -50,9 +136,10 @@ class App extends React.Component {
 					decrypted = Decode(new Uint8Array(result))
 				}
 				var jsonString = JSON.stringify(JSON.parse(decrypted), undefined, 2)
-				const hash = Hash(jsonString)
+				const formattedView = formatFleaFields(jsonString)
+				const hash = Hash(formattedView)
 				history.removeFromHistory(hash)
-				history.addToHistory(jsonString, file.name, hash)
+				history.addToHistory(formattedView, file.name, hash)
 				history.syncToLocalStorage()
 				this.setGameFile(jsonString, file.name)
 			} catch (err){
@@ -63,16 +150,23 @@ class App extends React.Component {
 		})
     }
     handleEditorChange = e => {
-        this.setState({gameFile: e.target.value})
+        const formattedText = e.target.value
+        // Update the displayed formatted text
+        this.setState({gameFile: formattedText})
+        
+        // Parse the formatted text back to complete JSON and store it
+        const updatedCompleteJson = parseFleaFields(formattedText, this.state.gameFileComplete)
+        this.setState({gameFileComplete: updatedCompleteJson})
     }
     handleReset = e => {
         this.setState({
-            gameFile: this.state.gameFileOriginal
+            gameFile: this.state.gameFileOriginal,
+            gameFileComplete: this.state.gameFileCompleteOriginal
         }) 
     }
 	handleDownloadAsSwitchSave = e => {
 		try {
-            var data = JSON.stringify(JSON.parse(this.state.gameFile))
+            var data = JSON.stringify(JSON.parse(this.state.gameFileComplete))
             DownloadData(data, "plain.dat")
         } catch (err){
             window.alert("Could not parse valid JSON. Reset or fix.")
@@ -80,7 +174,7 @@ class App extends React.Component {
     }
     handleDownload = e => {
         try {
-            var data = JSON.stringify(JSON.parse(this.state.gameFile))
+            var data = JSON.stringify(JSON.parse(this.state.gameFileComplete))
             var encrypted = Encode(data)
             DownloadData(encrypted, "user1.dat")
         } catch (err){
@@ -88,10 +182,14 @@ class App extends React.Component {
         }
     }
     setGameFile = (jsonString, name) => {
-        jsonString = JSON.stringify(JSON.parse(jsonString), undefined, 2)
+        const completeJson = JSON.stringify(JSON.parse(jsonString), undefined, 2)
+        const formattedView = formatFleaFields(jsonString)
+        
         this.setState({
-            gameFile: jsonString,
-            gameFileOriginal: jsonString,
+            gameFile: formattedView,
+            gameFileOriginal: formattedView,
+            gameFileComplete: completeJson,
+            gameFileCompleteOriginal: completeJson,
             gameFileName: name, 
             editing: true 
         })
