@@ -69,9 +69,37 @@ body {
   list-style-type: square; 
 }
 
-#source,#original-source,#edit {
+#source {
   font-size: smaller;
   color: #666;
+  margin-bottom: 8px;
+}
+
+#original-source {
+  font-size: smaller;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+#edit {
+  font-size: smaller;
+  color: #555;
+  margin-bottom: 16px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-left: 3px solid #007bff;
+  border-radius: 4px;
+}
+
+#edit a {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+#edit a:hover {
+  color: #0056b3;
+  text-decoration: none;
 }
 
 #file-button {
