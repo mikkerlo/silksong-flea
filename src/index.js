@@ -8,59 +8,59 @@ var windowDrag = new WindowDrag()
 
 // List of specific SavedFlea fields to display
 const TARGET_FLEA_FIELDS = [
-    'SavedFlea_Bone_06',
-    'SavedFlea_Dock_16',
-    'SavedFlea_Bone_East_05',
-    'SavedFlea_Bone_East_17b',
     'SavedFlea_Ant_03',
-    'SavedFlea_Greymoor_15b',
-    'SavedFlea_Greymoor_06',
-    'SavedFlea_Shellwood_03',
-    'SavedFlea_Bone_East_10_Church',
-    'SavedFlea_Coral_35',
-    'SavedFlea_Dust_12',
-    'SavedFlea_Dust_09',
     'SavedFlea_Belltown_04',
-    'SavedFlea_Crawl_06',
-    'SavedFlea_Slab_Cell',
-    'SavedFlea_Shadow_28',
-    'SavedFlea_Dock_03d',
-    'SavedFlea_Under_23',
-    'SavedFlea_Shadow_10',
-    'SavedFlea_Song_14',
+    'SavedFlea_Bone_06',
+    'SavedFlea_Bone_East_05',
+    'SavedFlea_Bone_East_10_Church',
+    'SavedFlea_Bone_East_17b',
     'SavedFlea_Coral_24',
-    'SavedFlea_Peak_05c',
-    'SavedFlea_Library_09',
-    'SavedFlea_Song_11',
+    'SavedFlea_Coral_35',
+    'SavedFlea_Crawl_06',
+    'SavedFlea_Dock_03d',
+    'SavedFlea_Dock_16',
+    'SavedFlea_Dust_09',
+    'SavedFlea_Dust_12',
+    'SavedFlea_Greymoor_06',
+    'SavedFlea_Greymoor_15b',
     'SavedFlea_Library_01',
+    'SavedFlea_Library_09',
+    'SavedFlea_Peak_05c',
+    'SavedFlea_Shadow_10',
+    'SavedFlea_Shadow_28',
+    'SavedFlea_Shellwood_03',
+    'SavedFlea_Slab_06',
+    'SavedFlea_Slab_Cell',
+    'SavedFlea_Song_11',
+    'SavedFlea_Song_14',
     'SavedFlea_Under_21',
-    'SavedFlea_Slab_06'
+    'SavedFlea_Under_23'
 ]
 
 // Map Genie location IDs for flea fields (to be populated with actual IDs)
 const FLEA_MAPGENIE_IDS = {
     'SavedFlea_Bone_06': '',
-    'SavedFlea_Dock_16': '',
+    'SavedFlea_Dock_16': '477907',
     'SavedFlea_Bone_East_05': '',
     'SavedFlea_Bone_East_17b': '',
     'SavedFlea_Ant_03': '',
     'SavedFlea_Greymoor_15b': '',
     'SavedFlea_Greymoor_06': '',
     'SavedFlea_Shellwood_03': '',
-    'SavedFlea_Bone_East_10_Church': '',
+    'SavedFlea_Bone_East_10_Church': '478219',
     'SavedFlea_Coral_35': '',
     'SavedFlea_Dust_12': '',
     'SavedFlea_Dust_09': '',
     'SavedFlea_Belltown_04': '',
-    'SavedFlea_Crawl_06': '',
+    'SavedFlea_Crawl_06': '478450',
     'SavedFlea_Slab_Cell': '',
     'SavedFlea_Shadow_28': '',
     'SavedFlea_Dock_03d': '',
-    'SavedFlea_Under_23': '',
-    'SavedFlea_Shadow_10': '',
+    'SavedFlea_Under_23': '478419',
+    'SavedFlea_Shadow_10': '478416',
     'SavedFlea_Song_14': '',
     'SavedFlea_Coral_24': '',
-    'SavedFlea_Peak_05c': '',
+    'SavedFlea_Peak_05c': '478380',
     'SavedFlea_Library_09': '',
     'SavedFlea_Song_11': '',
     'SavedFlea_Library_01': '',
@@ -225,9 +225,10 @@ class App extends React.Component {
         return <div id="wrapper">
             {this.state.dragging && <div id="cover"></div>}
             <p id="description">This online tool is a Silksong flea location helper that allows you to view SavedFlea fields in a Hollow Knight: Silksong save file.</p>
-            <p id="source">You can view the source code in the <a href="https://github.com/bloodorca/hollow">github repo</a>.</p>
-			<ul id="instructions">
-                <li>Make a backup of your original file.</li>
+            <p id="source">You can view the source code in the <a href="https://github.com/silksong-flea">github repo</a>.</p>
+            <p id="original-source">Code itself is shamelessly copied from <a href="https://bloodorca.github.io/hollow/">Hollow knight save file editor</a>. If you need save editor you can use that save editor as well.</p>
+            <p id="edit">If you want to share matching from name in save file to mapgenie, you are welcomed to do so! <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvRIFSdAP6vc_q9mZIZK-sa2hB3YEk44mh-0_bgkTTuaafUA/viewform?fbzx=-6146904633074299976">Here</a> is the form</p>
+            <ul id="instructions">
                 <li>Select or drag in the Silksong save file you want to analyze.</li>
                 <li>View the SavedFlea collection status and map locations in the table below.</li>
             </ul>
@@ -262,7 +263,7 @@ class App extends React.Component {
                                 <table id="flea-table">
                                     <thead>
                                         <tr>
-                                            <th>Field Name</th>
+                                            <th>Save file field name</th>
                                             <th>Status</th>
                                             <th>Map Location</th>
                                         </tr>

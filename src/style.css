@@ -69,7 +69,7 @@ body {
   list-style-type: square; 
 }
 
-#source {
+#source,#original-source,#edit {
   font-size: smaller;
   color: #666;
 }
