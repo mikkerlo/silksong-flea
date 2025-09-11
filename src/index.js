@@ -225,9 +225,14 @@ class App extends React.Component {
         return <div id="wrapper">
             {this.state.dragging && <div id="cover"></div>}
             <p id="description">This online tool is a Silksong flea location helper that allows you to view SavedFlea fields in a Hollow Knight: Silksong save file.</p>
-            <p id="source">You can view the source code in the <a href="https://github.com/silksong-flea">GitHub repository</a>.</p>
-            <p id="original-source">This code is based on the <a href="https://bloodorca.github.io/hollow/">Hollow Knight save file editor</a>. If you need a save file editor, you can use the original tool as well.</p>
+            
+            <div className="info-section">
+                <p id="source">You can view the source code in the <a href="https://github.com/mikkerlo/silksong-flea">GitHub repository</a>.</p>
+                <p id="original-source">This code is based on the <a href="https://bloodorca.github.io/hollow/">Hollow Knight save file editor</a>. If you need a save file editor, you can use the original tool as well.</p>
+            </div>
+            
             <p id="edit">If you want to share mappings from save file field names to MapGenie locations, you are welcome to do so! Please use <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvRIFSdAP6vc_q9mZIZK-sa2hB3YEk44mh-0_bgkTTuaafUA/viewform?fbzx=-6146904633074299976">this form</a> to contribute.</p>
+            
             <ul id="instructions">
                 <li>Select or drag in the Silksong save file you want to analyze.</li>
                 <li>View the SavedFlea collection status and map locations in the table below.</li>

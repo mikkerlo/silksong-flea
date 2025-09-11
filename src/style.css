@@ -52,13 +52,16 @@ body {
 #wrapper {
   max-width: 700px; 
   padding: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
   display: grid; 
   justify-items: left;
 }
 
 #description {
-  margin: 0;
+  margin: 0 0 12px 0;
+  font-size: 1.1em;
+  line-height: 1.4;
+  color: #2c3e50;
 }
 
 #instructions {
@@ -72,20 +75,26 @@ body {
 #source {
   font-size: smaller;
   color: #666;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 #original-source {
   font-size: smaller;
   color: #666;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
+}
+
+.info-section {
+  margin: 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
 }
 
 #edit {
   font-size: smaller;
   color: #555;
-  margin-bottom: 16px;
-  padding: 12px;
+  margin: 12px 0 8px 0;
+  padding: 10px;
   background-color: #f8f9fa;
   border-left: 3px solid #007bff;
   border-radius: 4px;
