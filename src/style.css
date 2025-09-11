@@ -52,13 +52,16 @@ body {
 #wrapper {
   max-width: 700px; 
   padding: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
   display: grid; 
   justify-items: left;
 }
 
 #description {
-  margin: 0;
+  margin: 0 0 12px 0;
+  font-size: 1.1em;
+  line-height: 1.4;
+  color: #2c3e50;
 }
 
 #instructions {
@@ -72,6 +75,40 @@ body {
 #source {
   font-size: smaller;
   color: #666;
+  margin-bottom: 4px;
+}
+
+#original-source {
+  font-size: smaller;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.info-section {
+  margin: 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+#edit {
+  font-size: smaller;
+  color: #555;
+  margin: 12px 0 8px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-left: 3px solid #007bff;
+  border-radius: 4px;
+}
+
+#edit a {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+#edit a:hover {
+  color: #0056b3;
+  text-decoration: none;
 }
 
 #file-button {
@@ -105,63 +142,46 @@ body {
   margin-top: 5px;
   display: grid; 
   justify-items: left; 
-  grid-template-columns: auto 1fr auto auto;
-  grid-template-areas: "a b c d"; 
+  grid-template-columns: auto 1fr;
   grid-column-gap: 10px;
   font-size: 0.95em;
 }
 
-#editor-buttons > button:nth-child(0n+2){
-  justify-self: right;
-  grid-area: c;
+#flea-table-container {
+  margin-top: 5px;
 }
 
-#editor-buttons > button:nth-child(0n+3){
-  justify-self: right;
-  grid-area: d;
+#flea-table-container h3 {
+  margin: 0 0 10px 0;
+  color: #333;
 }
 
-#history {
-  margin: 50px 0;
-}
-
-#history > div:first-child {
-  font-size: 1.2em;
-}
-
-#history > div:nth-child(0n+2) {
+#flea-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: inherit;
   font-size: 0.9em;
-  color: #777;
 }
 
-#history > ul {
-  list-style: none; 
-  padding: 0;
-  margin: 0;
-  margin-top: 10px;
-  display: grid; 
+#flea-table th,
+#flea-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
-.history-name {
-  color: royalblue;
+#flea-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
 }
 
-.history-date {
-  font-size: 0.8em;
+#flea-table tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-.history-item {
-  background-color: white; 
-  padding: 5px;
-  user-select: none;
-}
-
-.history-item:hover {
-  background-color: #eee;
-}
-
-.history-item:active {
-  background-color: #ddd;
+#flea-table tr:hover {
+  background-color: #f0f0f0;
 }
 
 #cover {
