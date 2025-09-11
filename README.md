@@ -16,11 +16,10 @@ This tool analyzes your Silksong save file to show your SavedFlea collection sta
 
 ## Instructions
 
-1. **Make a backup** of your original save file before analysis
-2. **Select or drag** your Silksong save file into the tool
-3. **View the table** showing your SavedFlea collection status
-4. **Click map links** (🗺️ View) to see flea locations on Map Genie
-5. **Use the missing summary** at the bottom to view all missing fleas at once
+1. **Select or drag** your Silksong save file into the tool
+2. **View the table** showing your SavedFlea collection status
+3. **Click map links** (🗺️ View) to see flea locations on Map Genie
+4. **Use the missing summary** at the bottom to view all missing fleas at once
 
 ## Save File Locations
 
