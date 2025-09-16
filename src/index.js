@@ -59,10 +59,10 @@ const FLEA_MAPGENIE_IDS = {
     'SavedFlea_Under_23': '478419',
     'SavedFlea_Shadow_10': '478416',
     'SavedFlea_Song_14': '',
-    'SavedFlea_Coral_24': '',
+    'SavedFlea_Coral_24': '478386',
     'SavedFlea_Peak_05c': '478380',
-    'SavedFlea_Library_09': '',
-    'SavedFlea_Song_11': '',
+    'SavedFlea_Library_09': '478404',
+    'SavedFlea_Song_11': '478416',
     'SavedFlea_Library_01': '',
     'SavedFlea_Under_21': '',
     'SavedFlea_Slab_06': ''
