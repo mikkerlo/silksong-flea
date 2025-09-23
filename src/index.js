@@ -6,42 +6,11 @@ import "./style.css"
 
 var windowDrag = new WindowDrag()
 
-// List of specific SavedFlea fields to display
-const TARGET_FLEA_FIELDS = [
-    'SavedFlea_Ant_03',
-    'SavedFlea_Belltown_04',
-    'SavedFlea_Bone_06',
-    'SavedFlea_Bone_East_05',
-    'SavedFlea_Bone_East_10_Church',
-    'SavedFlea_Bone_East_17b',
-    'SavedFlea_Coral_24',
-    'SavedFlea_Coral_35',
-    'SavedFlea_Crawl_06',
-    'SavedFlea_Dock_03d',
-    'SavedFlea_Dock_16',
-    'SavedFlea_Dust_09',
-    'SavedFlea_Dust_12',
-    'SavedFlea_Greymoor_06',
-    'SavedFlea_Greymoor_15b',
-    'SavedFlea_Library_01',
-    'SavedFlea_Library_09',
-    'SavedFlea_Peak_05c',
-    'SavedFlea_Shadow_10',
-    'SavedFlea_Shadow_28',
-    'SavedFlea_Shellwood_03',
-    'SavedFlea_Slab_06',
-    'SavedFlea_Slab_Cell',
-    'SavedFlea_Song_11',
-    'SavedFlea_Song_14',
-    'SavedFlea_Under_21',
-    'SavedFlea_Under_23'
-]
-
 // Map Genie location IDs for flea fields (to be populated with actual IDs)
 const FLEA_MAPGENIE_IDS = {
     'SavedFlea_Ant_03': '',
     'SavedFlea_Belltown_04': '',
-    'SavedFlea_Bone_06': '',
+    'SavedFlea_Bone_06': '477890',
     'SavedFlea_Bone_East_05': '477916',
     'SavedFlea_Bone_East_10_Church': '478219',
     'SavedFlea_Bone_East_17b': '',
@@ -51,14 +20,14 @@ const FLEA_MAPGENIE_IDS = {
     'SavedFlea_Dock_03d': '',
     'SavedFlea_Dock_16': '477907',
     'SavedFlea_Dust_09': '478378',
-    'SavedFlea_Dust_12': '478443',
+    'SavedFlea_Dust_12': '',
     'SavedFlea_Greymoor_06': '478287',
     'SavedFlea_Greymoor_15b': '478145',
     'SavedFlea_Library_01': '478402',
     'SavedFlea_Library_09': '478404',
     'SavedFlea_Peak_05c': '478380',
     'SavedFlea_Shadow_10': '478408',
-    'SavedFlea_Shadow_28': '',
+    'SavedFlea_Shadow_28': '478443',
     'SavedFlea_Shellwood_03': '478176',
     'SavedFlea_Slab_06': '478392',
     'SavedFlea_Slab_Cell': '',
@@ -67,6 +36,9 @@ const FLEA_MAPGENIE_IDS = {
     'SavedFlea_Under_21': '478420',
     'SavedFlea_Under_23': '478419',
 }
+
+// List of specific SavedFlea fields to display
+const TARGET_FLEA_FIELDS = Object.keys(FLEA_MAPGENIE_IDS)
 
 // Function to extract target fields from playerData for table display
 function extractFleaFields(jsonData) {
