@@ -8,8 +8,8 @@ var windowDrag = new WindowDrag()
 
 // Map Genie location IDs for flea fields (to be populated with actual IDs)
 const FLEA_MAPGENIE_IDS = {
-    'SavedFlea_Ant_03': '',
-    'SavedFlea_Belltown_04': '',
+    'SavedFlea_Ant_03': '477999',
+    'SavedFlea_Belltown_04': '478193',
     'SavedFlea_Bone_06': '477890',
     'SavedFlea_Bone_East_05': '477916',
     'SavedFlea_Bone_East_10_Church': '478219',
