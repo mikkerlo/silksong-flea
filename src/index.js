@@ -14,7 +14,7 @@ const FLEA_MAPGENIE_IDS = {
     'SavedFlea_Bone_East_05': '477916',
     'SavedFlea_Bone_East_10_Church': '478219',
     'SavedFlea_Bone_East_17b': '',
-    'SavedFlea_Coral_24': '478386',
+    'SavedFlea_Coral_24': '478385',
     'SavedFlea_Coral_35': '',
     'SavedFlea_Crawl_06': '478450',
     'SavedFlea_Dock_03d': '',
