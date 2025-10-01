@@ -35,6 +35,7 @@ const FLEA_MAPGENIE_IDS = {
     'SavedFlea_Song_14': '478398',
     'SavedFlea_Under_21': '478420',
     'SavedFlea_Under_23': '478419',
+    'tamedGiantFlea': '478413',
 }
 
 // List of specific SavedFlea fields to display
